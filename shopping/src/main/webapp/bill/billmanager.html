@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/icon.css">
+    <!--<link rel="stylesheet" type="text/css" href="../css/demo.css">&lt;!&ndash;这是窗口的样式，影响头部样式&ndash;&gt;-->
+    <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../myjs/billmanager.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            /*border:red solid 1px;*/
+        }
+    </style>
+</head>
+<body>
+
+<div id="mycontent">
+    <div style="margin:0px 10px 0px 15px;padding:3px 3px 3px 30px;background-color:#F8FBFE;border-radius:5px;border: 1px solid #E6EAF6;">
+        <img src="../images/home.png" style="vertical-align: middle">
+        <span style="font:bold 14px/24px 宋体">你现在所处的位置是：</span>
+        <span id="position" style="font:bold 14px/24px 宋体;color:#297BB4">首页</span>
+    </div>
+    <form id="ffsearch" action="" method="post">
+        <span>商品名称:</span>
+        <input type="text" class="productname" id="productname" name="productname" value=""/>
+        <span>供应商:</span>
+        <select class="providerid" id="providerid" name="providerid">
+            <option value="">请选择</option>
+        </select>
+        <span>是否付款:</span>
+        <select class="ispayment" id="ispayment" name="ispayment">
+            <option value="">请选择</option>
+            <option value="2">已付款</option>
+            <option value="1">未付款</option>
+        </select>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-success selectSearchBill" onclick="submitBillSearch()"><img src="../images/search.png">查询</button>
+    </form>
+    <table id="dg" class="easyui-datagrid" title=""
+           data-options="singleSelect:false,rownumbers:false,collapsible:true,url:'../allAction',method:'post'">
+    </table>
+</div>
+</body>
+</html>

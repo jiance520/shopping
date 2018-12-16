@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css"><!--这是窗口的样式，影响头部样式-->
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css"/>&lt;!&ndash;影响数据表格&ndash;&gt;-->
+    <script type="text/javascript" src="myjs/myjs.js"></script>
+    <style type="text/css">
+        #mywestcss,*{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            /*border:red solid 1px;*/
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        #myhead1 *{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="easyui-layout" style="background-color:#5B96D7;">
+<div id="myhead1" style="padding:0 20px 0 50px;color:white;font-weight:bold;height:60px;display:flex; align-items: center;" >
+    <img src="images/buy.png" style="vertical-align: middle"/>
+    <span style="font:bold 24px 宋体;width:1400px;">超市订单管理系统</span>
+    <span>下午好!</span>&nbsp;
+    <span id="logininfo" style="color:#E5F21B;"></span>&nbsp;
+    <span>，欢迎你！</span>&nbsp;&nbsp;
+    <a href="javascript:void(0)" style="width:70px;font:bold 14px/30px 宋体;text-align:center;line-height:30px;color:white;border-radius:3px;text-decoration:none;background-color:#94CC46;margin:20px 0 20px 0" onclick="exit()">退出</a>
+</div>
+<div style=";background-color:#E2ECF5;padding:3px 3px 3px 40px;font:normal 9px/24px 宋体;color:#808589;display:flex; align-items: center;">
+    <img src="images/time.png" style="vertical-align:middle"><span id="show_time"></span>
+    <span style="margin-right:10px;transform:translate(1350px,0);">温馨提示:请使用高版本浏览器</span>
+</div>
+<div class="easyui-layout" style="width:100%;height:80%;">
+    <!--<div data-options="region:'north'" style="height:50px"></div>-->
+    <!--<div data-options="region:'south',split:true" style="height:50px;"></div>-->
+    <div id="mywestcss" data-options="region:'west',split:true" title="功能列表" style="width:10%;">
+        <div class="easyui-accordion" data-options="fit:true,border:false">
+            <div title="订单管理" style="padding:10px;">
+                <br>
+                <div style="cursor:pointer;" class="showpage" href="bill/billmanager.html" onclick="showpage('bill/billmanager.html',this)"><img src="images/zd.png"><span>订单管理</span></div>
+                <hr style="border: 1px dashed #c0c0c0;margin: 10px 0 10px 0">
+                <div style="cursor:pointer;" class="showpage" onclick="showpage('.html')"><img src="images/gys.png"><span>供应商管理</span></div>
+                <hr style="border: 1px dashed #c0c0c0;margin: 10px 0 10px 0">
+                <div style="cursor:pointer;" class="showpage" onclick="showpage('.html')"><img src="images/yh.png"><span>用户管理</span></div>
+                <hr style="border: 1px dashed #c0c0c0;margin: 10px 0 10px 0">
+                <div style="cursor:pointer;" class="showpage" onclick="showpage('.html')"><img src="images/mm.png"><span>密码管理</span></div>
+                <hr style="border: 1px dashed #c0c0c0;margin: 10px 0 10px 0">
+                <div style="cursor:pointer;" class="showpage" onclick="showpage('.html')"><img src="images/tc.png"><span>退出系统</span></div>
+                <br>
+            </div>
+            <div title="供应商管理" data-options="selected:true" style="padding:10px;">
+                mycontent2
+            </div>
+            <div title="用户管理" style="padding:10px">
+                mycontent3
+            </div>
+            <div title="密码修改" style="padding:10px">
+                mycontent3
+            </div>
+            <div title="退出系统" style="padding:10px">
+                mycontent3
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok'">
+        <div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="DataGrid1" id="DataGrid1" href="system.html" style="padding:10px"></div>
+            <div title="DataGrid2" style="padding:5px">
+                <table class="easyui-datagrid"
+                       data-options="url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'itemid'" width="80">Item ID</th>
+                        <th data-options="field:'productid'" width="100">Product ID</th>
+                        <th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+                        <th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+                        <th data-options="field:'attr1'" width="150">Attribute</th>
+                        <th data-options="field:'status',align:'center'" width="50">Status</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--win-bill-add只能放在父页面，放子页面样式无效-->
+<div id="win-bill-add" class="easyui-window" title="增加订单" style="" data-options="iconCls:'icon-add',modal:true,closed:'true'">
+    <div style="padding:10px 60px 20px 60px">
+        <form id="ff-bill-add" class="easyui-form" method="post"  data-options="novalidate:true">
+            <table cellpadding="5">
+                <tr>
+                    <td style="padding:10px 0 10px 0;" align="right">订单编号:</td>
+                    <td><input class="easyui-textbox" type="text" name="billCode" data-options="required:true,missingMessage:'编号不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品名称:</td>
+                    <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true,missingMessage:'名称不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品单位:</td>
+                    <td><input class="easyui-textbox" type="text" name="productUnit" data-options="required:true,missingMessage:'单位不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品数量:</td>
+                    <td><input class="easyui-textbox" type="text" name="productCount" data-options="required:true,missingMessage:'数量不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">总金额:</td>
+                    <td><input class="easyui-textbox" type="text" name="totalPrice" data-options="required:true,missingMessage:'金额不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">供应商:</td>
+                    <td>
+                        <input type="text" class="easyui-combobox" id="providerIdBillAdd" name="proName" title="" value="请选择"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;">是否付款:</td>
+                    <td>
+                        <input class="" type="radio" name="isPayment" data-options="required:true" value="1" title="" checked="checked"/>未付款
+                        <input class="" type="radio" name="isPayment" data-options="required:true" value="2" title=""/>已付款
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align:center;padding:5px">
+            <button class="btn bg-primary navbar-btn" onclick="submitBillAdd()">保存</button>
+            <button class="btn bg-primary navbar-btn" onclick="backBillAdd()">返回</button>
+        </div>
+    </div>
+</div>
+<div class="row" style="text-align: center"><span>版权归北大青鸟</span></div>
+</body>
+</html>
+<!--显示网页-->
+<script>
+    function showpage(url,ele) {
+        $('#DataGrid1').load(url+" #mycontent",function (result) {
+            jQuery.getScript("../myjs/billmanager.js");
+            $("#position").html($(ele).children("span").html());
+        });
+    }
+//    $(document).ready(function () {
+//        $(document).on("click",'.showpage',function () {
+//            var url = $(this).attr("href");
+//            $('#DataGrid1').load(url+" #mycontent",function (result) {
+//                $(result).find("script").appendTo('#DataGrid1');
+//            });
+//        })
+//    })
+    //返回?后的json对象
+    function getRequest() {
+        //获取url中"?"符后的字串
+        var url = location.search;
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                //theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                //theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+                theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+    //    登陆状态
+    var username = getRequest()["username"];
+    if(username!=null && username!=''){
+        $("#logininfo").html(username);
+    }
+    // 退出
+    function exit() {
+        $.post("exitAction",{},function (data) {
+            window.location.href="index.html";
+        },'json')
+    }
+    //信息查看
+    //    点击订单，加载数据表格的showrow方法，以及获数据表格的js，
+    //此时js和数据表格都在bill主页，主页通过rowaction，加载bill-show
+    function showrow(index) {
+        var row=$('#dg').datagrid('getRows')[index];
+        $('#DataGrid1').load("bill/bill-show.html"+" #mycontent",function (result) {
+            $("#position").html("订单管理 >> 信息查看");
+            var node =
+                '<table id="showbill" cellpadding="5">\n' +
+                '                <tr>\n' +
+                '                    <td style="padding:10px 0 10px 0;" align="right">订单编号:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.billCode+'</td>\n' +
+                '                </tr>\n' +
+                '                <tr>\n' +
+                '                    <td  style="padding:10px 0 10px 0;" align="right">商品名称:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.productName+'</td>\n' +
+                '                </tr>\n' +
+                '                <tr>\n' +
+                '                    <td  style="padding:10px 0 10px 0;" align="right">商品单位:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.productUnit+'</td>\n' +
+                '                </tr>\n' +
+                '                <tr>\n' +
+                '                    <td  style="padding:10px 0 10px 0;" align="right">商品数量:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.productCount+'</td>\n' +
+                '                </tr>\n' +
+                '                <tr>\n' +
+                '                    <td  style="padding:10px 0 10px 0;" align="right">总金额:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.totalPrice+'</td>\n' +
+                '                </tr>\n' +
+                '                <tr>\n' +
+                '                    <td  style="padding:10px 0 10px 0;" align="right">供应商:</td>\n' +
+                '                    <td style="font:bold 12px 宋体;color:#BD644E">'+row.proName+'</td>\n' +
+                '                </tr>\n' +
+                '            </table>';
+            if(row.isPayment==1){
+                var node2 =
+                    '                <tr>\n' +
+                    '                    <td  style="padding:10px 0 10px 0;" align="right">是否付款:</td>\n' +
+                    '                    <td style="font:bold 12px 宋体;color:#BD644E">未付款</td>\n' +
+                    '                </tr>';
+                node = node + node2;
+            }
+            else {
+                var node2 =
+                    '                <tr>\n' +
+                    '                    <td  style="padding:10px 0 10px 0;" align="right">是否付款:</td>\n' +
+                    '                    <td style="font:bold 12px 宋体;color:#BD644E">已付款</td>\n' +
+                    '                </tr>';
+                node = node + node2;
+            }
+            $("#ffshow").html(node);
+        });
+    }
+    function backBill() {
+        window.location.href="bill.html";
+    }
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/icon.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0 auto;
+            padding: 0;
+            font-size: 16px;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            background: url('images/login_bg.jpg') no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 12%"></div>
+    <div style="height:38%">
+        <div style="text-align: center;font:bold 25px/70px 宋体;color: white;">超市订单管理系统</div>
+        <form id="ff" style="margin:0 auto;width:387px;height:280px;padding:50px; background:url('images/formBg.png') no-repeat;">
+            <div class="form-group">
+                <div>用户名：</div>
+                <input type="text" class="form-control" id="usercode" name="usercode" placeholder="请输入用ID"  data-options="required:true,missingMessage:'字段不能为空'">
+            </div>
+            <div class="form-group">
+                <div>密码：</div>
+                <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="请输入密码" data-options="required:true,missingMessage:'字段不能为空'">
+            </div>
+            <div style="text-align:center;">
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="submitForm()">登陆</a>&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="clearForm()">重置</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function submitForm(){
+        $('#ff').form('submit',{
+                url:'loginAction',
+                success:function(data){
+                    if(data.length>0){
+                        var json = JSON.parse(data);
+                        window.location.href="bill.html?username="+json.username;
+                    }
+                    else {
+                        alert('输入错误，请重新登陆');
+                    }
+                }
+            }
+        );
+    }
+
+    function clearForm(){
+        $('#ff').form('clear');
+    }
+</script>

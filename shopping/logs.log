@@ -1,0 +1,3 @@
+[DEBUG]2018-08-14 21:40:42,161-==>  Preparing: SELECT * FROM smbms_bill 
+[DEBUG]2018-08-14 21:40:42,180-==> Parameters: 
+[DEBUG]2018-08-14 21:40:42,211-<==      Total: 19

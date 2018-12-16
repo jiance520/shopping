@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/icon.css">
+    <!--<link rel="stylesheet" href="../css/bootstrap.css"/>-->
+    <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<div class="" title="标题" style="border: 1px solid #444;">
+    <div style="padding:10px 60px 20px 60px">
+        <form id="ffadd" class="easyui-form" method="post"  data-options="novalidate:true">
+            <table cellpadding="5">
+                <tr>
+                    <td style="padding:10px 0 10px 0;" align="right">订单编号:</td>
+                    <td><input class="easyui-textbox" type="text" name="billcode" data-options="required:true,missingMessage:'编号不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品名称:</td>
+                    <td><input class="easyui-textbox" type="text" name="productname" data-options="required:true,missingMessage:'名称不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品单位:</td>
+                    <td><input class="easyui-textbox" type="text" name="productunit" data-options="required:true,missingMessage:'单位不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">商品数量:</td>
+                    <td><input class="easyui-textbox" type="text" name="productcount" data-options="required:true,missingMessage:'数量不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">总金额:</td>
+                    <td><input class="easyui-textbox" type="text" name="totalprice" data-options="required:true,missingMessage:'金额不能为空'" title=""/></td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;" align="right">供应商:</td>
+                    <td>
+                        <select class="easyui-combobox" name="proname" title=""><option value="ar">Arabic</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="zh-cht">Chinese Traditional</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en" selected="selected">English</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="de">German</option><option value="el">Greek</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="padding:10px 0 10px 0;">是否付款:</td>
+                    <td>
+                        <input class="" type="radio" name="isPayment" data-options="required:true" value="1" title="" checked="checked"/>未付款
+                        <input class="" type="radio" name="isPayment" data-options="required:true" value="2" title=""/>已付款
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align:center;padding:5px">
+            <button class="btn bg-primary navbar-btn" onclick="submitForm()">保存</button>
+            <button class="btn bg-primary navbar-btn" onclick="clearForm()">返回</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.post("pronameAction",{},function (data) {
+        },"json");
+    });
+    function formatItem(row){
+        var s = '<span style="font-weight:bold">' + row.text + '</span><br/>' +
+            '<span style="color:#888">' + row.desc + '</span>';
+        return s;
+    }
+    $('#cc').combobox({
+//        onLoadSuccess: function (data) {
+//            if (data == 0) {
+//                $.messager.alert("系统提示", "数据库异常，请联系管理员！", "warning");
+//            } else {
+//                var data1 = $('#cc').combobox('getData');  //赋默认值
+//                if (data1.length > 0) {
+//                    $("#cc").combobox('select', data1[0].id);//默认选择第1个
+//                }
+//            }
+//        },
+//        onSelect: function (data) {
+////            alert(data.id);//这个id,是Language的？
+//        }
+    });
+    function submitForm(){
+        $('#ff').form('submit',{
+                url:'AjaxAction',
+                onSubmit:function(){
+                    //return false;
+                },
+                success:function(data){
+                    alert(data);
+                }
+            }
+        );
+    }
+    function clearForm(){
+        $('#ff').form('clear');
+    }
+</script>
