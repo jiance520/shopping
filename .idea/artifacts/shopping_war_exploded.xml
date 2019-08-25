@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="shopping:war exploded">
     <output-path>$PROJECT_DIR$/shopping/target/shopping</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>shopping</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -49,7 +56,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.1.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-test:2.0.1.RELEASE" />
         </element>
       </element>
