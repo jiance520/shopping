@@ -27,13 +27,18 @@
   </parent>
 
   <dependencies>
+    <!-- web支持，SpringMVC， Servlet支持等 -->
+    <!--要加，否则接口不返回数据，rundashboard不显示端口？-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.0.3.RELEASE</version>
     </dependency>
+    <!-- Sprig Boot/SpringJUnit支持 测试支持,spring-boot-starter-test中已经集成了junit4.12，spring-test-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <!--test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。-->
       <scope>test</scope>
     </dependency>
 
@@ -41,19 +46,22 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
+      <!--provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar-->
       <scope>provided</scope>
     </dependency>
     <!--用于编译jsp-->
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-jasper</artifactId>
-      <scope>provided</scope>
+      <!--provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar-->
+            <scope>provided</scope>
     </dependency>
     <!--声明spring boot内嵌tomcat的作用范围  在运行时不起作用-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
+      <!--provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar-->
+            <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -69,7 +77,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.6</version>
+      <version>5.1.47</version>
     </dependency>
     <!-- spring boot 热部署 -->
     <dependency>
@@ -77,16 +85,18 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
+    <!--spring-boot-starter-test中已经集成了junit4.12-->
+    <!--<dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        &lt;!&ndash;test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。&ndash;&gt;
+        <scope>test</scope>
+    </dependency>-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>RELEASE</version>
+      <version>5.1.5.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
